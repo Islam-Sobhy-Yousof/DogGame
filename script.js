@@ -66,7 +66,7 @@ const updatePlayerTotalScore = function (
   playerCurrScore.textContent = '0';
   activePlayer.classList.remove('player--active');
   inactivePlayer.classList.add('player--active');
-  thereIsAWinner(activePlayer,playerTotScore);
+  thereIsAWinner(activePlayer, playerTotScore);
 };
 holdScoreBtn.addEventListener('click', function () {
   //Find the active player
@@ -87,22 +87,23 @@ holdScoreBtn.addEventListener('click', function () {
   }
 });
 newGameBtn.addEventListener('click', function () {
-    diceImg.setAttribute('src', 'dice-5.png');
-    playerOneCurrentScore.textContent = '0';
-    playerOneTotalScore.textContent = '0';
-    playerTwoCurrentScore.textContent = '0';
-    playerTwoTotalScore.textContent = '0';
-    playerOne.classList.add('player--active');
-    playerTwo.classList.remove('player--active');
+  diceImg.setAttribute('src', 'dice-5.png');
+  playerOneCurrentScore.textContent = '0';
+  playerOneTotalScore.textContent = '0';
+  playerTwoCurrentScore.textContent = '0';
+  playerTwoTotalScore.textContent = '0';
+  playerOne.classList.add('player--active');
+  playerTwo.classList.remove('player--active');
+  diceImg.setAttribute('src', '');
 });
-const thereIsAWinner = function(activePlayer,currTotScore){
-    const currTotScoreValue = Number(currTotScore.textContent);
-    if(currTotScoreValue >= 100){
-        newGameBtn.click();
-        if(activePlayer === playerOne){
-            alert('Player One Wins');
-        }else{
-            alert('Player Two Wins');
-        }
+const thereIsAWinner = function (activePlayer, currTotScore) {
+  const currTotScoreValue = Number(currTotScore.textContent);
+  if (currTotScoreValue >= 100) {
+    newGameBtn.click();
+    if (activePlayer === playerOne) {
+      alert('Player One Wins');
+    } else {
+      alert('Player Two Wins');
     }
-}
+  }
+};
