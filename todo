@@ -1,0 +1,8 @@
+- work on Roll button [done]
+- work on current player score[done]
+- work on hold button[done]
+- work on NewGame button[done]
+  - set the image to the default one[done]
+  - set the players current and total scores to zero[done]
+  - set the active state to the first player[done]
+- work on win case [done]
