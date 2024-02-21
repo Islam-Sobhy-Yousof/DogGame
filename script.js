@@ -14,7 +14,9 @@ const playerTwo = document.querySelector('.player--1');
 //Current player score
 const playerOneCurrentScore = document.getElementById('current--0');
 const playerTwoCurrentScore = document.getElementById('current--1');
+let hasFinished = false;
 //Logic
+diceImg.classList.add('hidden');
 const updatePlayerCurrentScore = function (
   playerScore,
   diceValue,
@@ -33,6 +35,10 @@ const updatePlayerCurrentScore = function (
   }
 };
 rollDiceBtn.addEventListener('click', function () {
+  if (hasFinished === true) {
+    return;
+  }
+  diceImg.classList.remove('hidden');
   const diceValue = Math.trunc(Math.random() * 6 + 1);
   diceImg.setAttribute('src', `dice-${diceValue}.png`);
   if (playerOne.classList.contains('player--active')) {
@@ -69,6 +75,9 @@ const updatePlayerTotalScore = function (
   thereIsAWinner(activePlayer, playerTotScore);
 };
 holdScoreBtn.addEventListener('click', function () {
+  if (hasFinished === true) {
+    return;
+  }
   //Find the active player
   if (playerOne.classList.contains('player--active')) {
     updatePlayerTotalScore(
@@ -87,6 +96,8 @@ holdScoreBtn.addEventListener('click', function () {
   }
 });
 newGameBtn.addEventListener('click', function () {
+  hasFinished = false;
+  diceImg.classList.add('hidden');
   diceImg.setAttribute('src', 'dice-5.png');
   playerOneCurrentScore.textContent = '0';
   playerOneTotalScore.textContent = '0';
@@ -94,16 +105,21 @@ newGameBtn.addEventListener('click', function () {
   playerTwoTotalScore.textContent = '0';
   playerOne.classList.add('player--active');
   playerTwo.classList.remove('player--active');
+  playerOne.classList.remove('player--winner');
+  playerTwo.classList.remove('player--winner');
   diceImg.setAttribute('src', '');
 });
 const thereIsAWinner = function (activePlayer, currTotScore) {
   const currTotScoreValue = Number(currTotScore.textContent);
-  if (currTotScoreValue >= 100) {
+  if (currTotScoreValue >= 10) {
     newGameBtn.click();
     if (activePlayer === playerOne) {
-      alert('Player One Wins');
+      playerOne.classList.add('player--winner');
+      playerOne.classList.remove('player--active');
     } else {
-      alert('Player Two Wins');
+      playerTwo.classList.add('player--winner');
+      playerTwo.classList.remove('player--active');
     }
+    hasFinished = true;
   }
 };
